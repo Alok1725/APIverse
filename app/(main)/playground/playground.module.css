@@ -596,10 +596,20 @@
 }
 
 @media (max-width: 768px) {
-  .page { padding: 24px 16px 40px; max-width: 100%; }
+  .page { padding: 24px 16px 40px; max-width: 100%; overflow-x: hidden; }
   .pageHeader { flex-direction: column; align-items: stretch; }
   .quickExampleWrap { flex-direction: column; align-items: stretch; gap: 6px; }
   .quickSelect { min-width: unset; width: 100%; }
-  .panelHeader { flex-direction: column; align-items: flex-start; }
-  .respHeaderKey { min-width: 120px; }
+  .panelHeader { flex-wrap: wrap; gap: 8px; }
+  .respHeaderKey { min-width: 100px; }
+  .innerTabs { overflow-x: auto; scrollbar-width: none; }
+  .innerTabs::-webkit-scrollbar { display: none; }
+  .innerTab { white-space: nowrap; padding: 10px 14px; }
+  .requestLine { flex-wrap: wrap; }
+  .methodSelect { min-width: unset; width: auto; border-right: none; border-bottom: 1px solid var(--border-subtle); }
+  .urlInput { min-width: 0; width: 100%; }
+  .respPre { font-size: 11.5px; overflow-x: auto; }
+  .respBody { max-height: 300px; }
+  .authTypeRow { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .authSelect { width: 100%; }
 }

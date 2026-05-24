@@ -398,6 +398,22 @@
   width: min(480px, calc(100vw - 32px));
   padding: 28px;
   box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+@media (max-width: 540px) {
+  .modal {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: none;
+    width: 100%;
+    border-radius: 20px 20px 0 0;
+    padding: 20px 16px 36px;
+    max-height: 85vh;
+  }
 }
 
 .modalHeader {
