@@ -1,36 +1,149 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# APIverse
 
-## Getting Started
+A comprehensive, full-stack web application designed to be the intelligence layer for the API economy. APIverse lets developers discover, test, monitor, and compose APIs — all powered by AI.
 
-First, run the development server:
+The platform offers AI-driven API discovery, real-time health monitoring, an interactive playground, a drag-and-drop pipeline composer, and a live community feed — all under one roof.
 
+---
+
+## Technologies Used
+
+### Frontend
+- **Framework:** Next.js 16 (App Router) + React 19
+- **Styling:** Custom CSS Modules, CSS Variables (Warm Graphite dark theme)
+- **Fonts:** Inter, JetBrains Mono (Google Fonts)
+- **Animations:** Framer Motion (drag-and-drop canvas)
+- **Icons:** Lucide React, inline SVGs
+- **Auth UI:** NextAuth v5 (credentials, GitHub OAuth, Google OAuth)
+
+### Backend
+- **Framework:** Next.js API Routes (App Router)
+- **Database / ORM:** Supabase (PostgreSQL) + Prisma ORM
+- **Authentication:** NextAuth v5 — JWT strategy, 24h session expiry
+- **AI Integration:** Google Gemini, Groq SDK, Ollama (local models)
+- **Caching:** Redis (Upstash)
+- **File Handling:** Multer (via API routes)
+
+---
+
+## Running the Project Locally
+
+### Prerequisites
+- Node.js 18+ installed
+- A Supabase project (for database + user storage)
+- API keys for Google Gemini and Groq (for AI features)
+- Redis instance — Upstash recommended (free tier works)
+- Optional: Ollama installed locally for offline AI models
+
+### 1. Clone the repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/Alok1725/APIverse.git
+cd APIverse
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Environment Variables Setup
+Create a `.env.local` file in the project root. **Never commit this file.**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```env
+# Database
+DATABASE_URL=your_supabase_postgres_connection_string
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# NextAuth
+AUTH_SECRET=your_random_secret_string   # generate: openssl rand -base64 32
+NEXTAUTH_URL=http://localhost:3000
 
-## Learn More
+# OAuth (optional — leave blank to disable)
+GITHUB_CLIENT_ID=your_github_oauth_client_id
+GITHUB_CLIENT_SECRET=your_github_oauth_client_secret
+GOOGLE_CLIENT_ID=your_google_oauth_client_id
+GOOGLE_CLIENT_SECRET=your_google_oauth_client_secret
 
-To learn more about Next.js, take a look at the following resources:
+# AI Providers
+GEMINI_API_KEY=your_google_gemini_api_key
+GROQ_API_KEY=your_groq_api_key
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Redis
+REDIS_URL=your_upstash_redis_url
+REDIS_TOKEN=your_upstash_redis_token
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 3. Install Dependencies
+```bash
+npm install
+```
 
-## Deploy on Vercel
+### 4. Set Up the Database
+```bash
+npx prisma generate
+npx prisma db push
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Optionally seed the database with sample API data:
+```bash
+node prisma/seed.js
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 5. Run the Development Server
+```bash
+npm run dev --webpack
+```
+
+The app will be available at [http://localhost:3000](http://localhost:3000).
+
+---
+
+## Key Features
+
+- **Discover** — Search and explore a curated catalog of APIs with AI-powered descriptions, ratings, and reviews.
+- **Observatory** — Real-time health monitoring dashboard showing uptime, latency, and incident history for popular APIs.
+- **Playground** — Interactive API request builder. Set headers, body, method, and fire live requests — powered by AI completion.
+- **Compose** — Drag-and-drop pipeline canvas to chain multiple APIs into a workflow. Reorder steps, add from a palette, and generate with AI.
+- **Radar** — Live community feed of API changelogs, incidents, deprecations, and new releases — filterable by category.
+- **Dashboard** — Personal workspace showing saved APIs, recent searches, and activity.
+- **AI Assistant** — Gemini + Groq powered responses for API recommendations, schema explanations, and debugging help.
+- **Auth** — Email/password signup + GitHub and Google OAuth. Sessions expire after 24 hours requiring a daily re-login.
+
+---
+
+## Deployment
+
+The easiest way to deploy is via [Vercel](https://vercel.com):
+
+1. Push to GitHub (already done).
+2. Import the repo at [vercel.com/new](https://vercel.com/new).
+3. Add all environment variables from `.env.local` in **Settings → Environment Variables**.
+4. Deploy — Vercel auto-detects Next.js and handles everything else.
+
+> Make sure `DATABASE_URL` uses the **pooled** Supabase connection string for production (port `6543`, not `5432`).
+
+---
+
+## Project Structure
+
+```
+APIverse/
+├── app/
+│   ├── (auth)/          # Sign in / Sign up pages
+│   ├── (main)/          # All main app pages (discover, playground, etc.)
+│   ├── api/             # Next.js API routes (AI, auth, data)
+│   ├── globals.css      # CSS variables + global styles
+│   └── layout.jsx       # Root layout
+├── components/
+│   ├── layout/          # Navbar, Footer
+│   └── ui/              # Shared UI components
+├── lib/
+│   ├── ai/              # AI gateway (Gemini, Groq, Ollama providers)
+│   └── db.js            # Prisma client singleton
+├── prisma/
+│   ├── schema.prisma    # Database schema
+│   └── seed.js          # Sample data seeder
+├── public/              # Static assets + logo
+├── auth.js              # NextAuth configuration
+└── proxy.js             # Route protection middleware
+```
+
+---
+
+## Author
+
+Built by [Alok1725](https://github.com/Alok1725) · Follow on [X](https://x.com/Eren17Alok)
