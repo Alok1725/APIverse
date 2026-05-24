@@ -21,7 +21,7 @@ export default function TermsPage() {
     <div className={styles.page}>
       <div className={styles.hero}>
         <h1 className={styles.heroHeading}>Terms of Service</h1>
-        <span className={styles.lastUpdated}>Last updated: January 2025</span>
+        <span className={styles.lastUpdated}>Last updated: May 2026</span>
       </div>
 
       <div className={styles.layout}>
@@ -77,7 +77,7 @@ export default function TermsPage() {
             <p>
               You are responsible for maintaining the confidentiality of your account credentials and for all
               activity that occurs under your account. Notify us immediately at{' '}
-              <a href="mailto:security@apiverse.dev">security@apiverse.dev</a> if you suspect unauthorized access.
+              <a href="mailto:kushwahaalok956@gmail.com">kushwahaalok956@gmail.com</a> if you suspect unauthorized access.
             </p>
             <p>
               We reserve the right to suspend or terminate accounts that violate these Terms, engage in abusive
@@ -154,7 +154,7 @@ export default function TermsPage() {
             </p>
             <p>
               If you have questions about these Terms, contact us at{' '}
-              <a href="mailto:legal@apiverse.dev">legal@apiverse.dev</a> or via the{' '}
+              <a href="mailto:kushwahaalok956@gmail.com">kushwahaalok956@gmail.com</a> or via the{' '}
               <a href="/contact">contact form</a>.
             </p>
           </div>
