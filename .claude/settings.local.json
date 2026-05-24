@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(npx create-next-app@latest . --typescript=false --eslint --tailwind=false --src-dir=false --app --import-alias=\"@/*\" --yes)",
-      "Read(//c/Users/ASUS/AppData/Local/Temp/claude/c--Users-ASUS-OneDrive-Desktop-api/f47c5112-ec7f-40bb-8341-6d8670890ba2/tasks/**)"
-    ]
-  }
-}
