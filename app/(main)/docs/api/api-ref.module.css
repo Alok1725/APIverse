@@ -1,0 +1,272 @@
+.page {
+  color: var(--text-primary);
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 28px 0 0;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.breadLink {
+  color: var(--accent-primary);
+  text-decoration: none;
+}
+.breadLink:hover { text-decoration: underline; }
+
+.breadSep { color: var(--text-muted); }
+.breadCurrent { color: var(--text-secondary); }
+
+/* Hero */
+.hero {
+  padding: 40px 0 48px;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 48px;
+}
+
+.heroLabel {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-primary);
+  margin-bottom: 12px;
+}
+
+.heroTitle {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 12px;
+}
+
+.heroSub {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0 0 20px;
+}
+
+.inlineCode {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 13px;
+  padding: 2px 7px;
+  background: rgba(99,102,241,0.1);
+  border: 1px solid rgba(99,102,241,0.2);
+  border-radius: 4px;
+  color: var(--accent-primary);
+}
+
+.authNote {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: rgba(245,158,11,0.06);
+  border: 1px solid rgba(245,158,11,0.2);
+  border-radius: 8px;
+  padding: 8px 14px;
+  color: #d97706;
+}
+
+/* Content */
+.content { display: flex; flex-direction: column; gap: 48px; }
+
+/* Group */
+.group { display: flex; flex-direction: column; gap: 24px; }
+
+.groupHeader { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+
+.groupTag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid;
+}
+
+/* Route card */
+.routeCard {
+  background: var(--card-bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.routeHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.routeLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.methodBadge {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid;
+  font-family: 'JetBrains Mono', monospace;
+  white-space: nowrap;
+}
+
+.routePath {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 14px;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.routeSummary {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.routeDesc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Section within route card */
+.section { display: flex; flex-direction: column; gap: 10px; }
+
+.sectionTitle {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Params table */
+.paramsTable { display: flex; flex-direction: column; gap: 2px; }
+
+.paramsHead {
+  display: grid;
+  grid-template-columns: 140px 80px 80px 1fr;
+  gap: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 6px 12px;
+}
+
+.paramRow {
+  display: grid;
+  grid-template-columns: 140px 80px 80px 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.02);
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.paramName {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--accent-primary);
+}
+
+.paramType {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.paramDesc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Code block */
+.codeBlock {
+  background: var(--surface-raised, #0d0d14);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 16px 18px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  overflow-x: auto;
+  margin: 0;
+}
+
+.codeBlock code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+}
+
+/* Error list */
+.errorList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.errorItem {
+  font-size: 13px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+}
+
+.errorItem::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ef4444;
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .paramsHead,
+  .paramRow {
+    grid-template-columns: 110px 70px 70px 1fr;
+    gap: 8px;
+  }
+
+  .paramsHead { display: none; }
+  .paramRow { grid-template-columns: 1fr 1fr; row-gap: 4px; }
+  .paramRow > *:nth-child(3),
+  .paramRow > *:nth-child(4) { grid-column: 1 / -1; }
+}

@@ -1,0 +1,332 @@
+.page {
+  color: var(--text-primary);
+}
+
+/* Hero */
+.hero {
+  padding: 6rem 2rem 5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(99,102,241,0.12), transparent 70%);
+  pointer-events: none;
+}
+
+.heroLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  border-radius: var(--radius-full);
+  padding: 0.3rem 1rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.heroHeading {
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  max-width: 720px;
+  margin: 0 auto 1.5rem;
+}
+
+.heroHeading .gradient {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.heroSubtitle {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* Mission Section */
+.mission {
+  padding: 5rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .mission {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+.missionText h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  letter-spacing: -0.01em;
+}
+
+.missionText p {
+  color: var(--text-muted);
+  line-height: 1.75;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.statCard {
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  text-align: center;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.statCard:hover {
+  border-color: rgba(99, 102, 241, 0.3);
+  transform: translateY(-2px);
+}
+
+.statValue {
+  font-size: 2rem;
+  font-weight: 800;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.statLabel {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* What is section */
+.whatIs {
+  background: var(--bg-secondary);
+  padding: 5rem 2rem;
+}
+
+.whatIsInner {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.sectionLabel {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
+}
+
+.whatIsInner h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.01em;
+}
+
+.whatIsInner p {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+/* Feature highlights */
+.features {
+  padding: 5rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.featuresHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.featuresHeader h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.featuresHeader p {
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.featureCards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .featureCards {
+    grid-template-columns: 1fr;
+  }
+}
+
+.featureCard {
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.featureCard:hover {
+  border-color: rgba(99, 102, 241, 0.3);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.featureIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: rgba(99, 102, 241, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  font-size: 1.5rem;
+}
+
+.featureCard h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.6rem;
+}
+
+.featureCard p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+/* Open source section */
+.openSource {
+  background: var(--bg-secondary);
+  padding: 5rem 2rem;
+  text-align: center;
+}
+
+.openSourceInner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.openSourceInner h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.openSourceInner p {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.githubBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #161b22;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1.5rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+}
+
+.githubBtn:hover {
+  border-color: var(--accent-primary);
+  background: #21262d;
+}
+
+/* Tech stack */
+.techStack {
+  padding: 5rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.techStack h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.techStack > p {
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+}
+
+.techGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.techBadge {
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: 0.5rem 1.1rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all 0.2s;
+}
+
+.techBadge:hover {
+  border-color: rgba(99, 102, 241, 0.35);
+  color: var(--text-primary);
+  background: rgba(99, 102, 241, 0.05);
+}

@@ -1,0 +1,393 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  directUrl  = env("DIRECT_URL")
+  extensions = [pgvector(map: "vector", schema: "public"), uuid_ossp(map: "uuid-ossp", schema: "public")]
+}
+
+// ==========================================
+// AUTH MODELS (NextAuth compatible)
+// ==========================================
+
+model User {
+  id            String   @id @default(cuid())
+  name          String?
+  email         String   @unique
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // OAuth accounts
+  accounts      Account[]
+  sessions      Session[]
+
+  // App-specific
+  reviews       Review[]
+  savedApis     SavedApi[]
+  searchHistory SearchHistory[]
+  subscriptions Subscription[]
+  compositions  Composition[]
+
+  @@index([email])
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ==========================================
+// CORE API MODELS
+// ==========================================
+
+model Api {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  name          String
+  description   String   @db.Text
+  longDescription String? @db.Text
+  category      String
+  tags          String[]
+  logoUrl       String?
+  websiteUrl    String?
+  docsUrl       String?
+  baseUrl       String?
+
+  // Pricing
+  pricing       Json     // { model: 'free'|'freemium'|'paid', tiers: [] }
+
+  // Features
+  features      String[]
+
+  // OpenAPI/spec
+  openApiUrl    String?
+  openApiSpec   Json?
+
+  // AI-generated content
+  aiDocumentation Json?
+  aiSummary      String? @db.Text
+
+  // Embedding for semantic search
+  embedding     Unsupported("vector(1536)")?
+
+  // Health stats (denormalized for quick access)
+  currentStatus   HealthStatus @default(UNKNOWN)
+  avgLatency      Int?         // in milliseconds
+  uptime30d       Float?       // percentage, e.g. 99.92
+  uptime90d       Float?       // percentage
+  lastCheckedAt   DateTime?
+
+  // Meta
+  isVerified    Boolean  @default(false)
+  isFeatured    Boolean  @default(false)
+  viewCount     Int      @default(0)
+  searchCount   Int      @default(0)
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  endpoints     Endpoint[]
+  healthLogs    HealthLog[]
+  reviews       Review[]
+  savedBy       SavedApi[]
+  changelogs    Changelog[]
+  subscriptions Subscription[]
+  compositions  CompositionStep[]
+
+  @@index([category])
+  @@index([currentStatus])
+  @@index([isFeatured])
+  @@index([slug])
+}
+
+model Endpoint {
+  id          String  @id @default(cuid())
+  apiId       String
+  method      String  // GET, POST, PUT, DELETE, PATCH
+  path        String
+  name        String?
+  description String? @db.Text
+
+  // Parameters
+  parameters  Json?   // Array of parameter objects
+  requestBody Json?   // Request body schema
+  responses   Json?   // Response schemas by status code
+
+  // Examples
+  examples    Json?
+
+  // Auth
+  requiresAuth Boolean @default(true)
+
+  // AI-generated
+  aiDescription String? @db.Text
+  codeSnippets  Json?   // { javascript, python, curl, go }
+
+  // Stats
+  avgLatency  Int?    // ms
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  api Api @relation(fields: [apiId], references: [id], onDelete: Cascade)
+
+  @@index([apiId])
+  @@index([method])
+}
+
+model HealthLog {
+  id          String      @id @default(cuid())
+  apiId       String
+  status      HealthStatus
+  latency     Int?        // ms
+  statusCode  Int?
+  errorMsg    String?
+  region      String?     // 'us-east', 'eu-west', etc.
+  checkedAt   DateTime    @default(now())
+
+  api Api @relation(fields: [apiId], references: [id], onDelete: Cascade)
+
+  @@index([apiId])
+  @@index([checkedAt])
+  @@index([apiId, checkedAt])
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  apiId     String
+  userId    String
+  rating    Int      // 1-5
+  title     String?
+  body      String   @db.Text
+
+  // Structured scores
+  scores    Json?    // { easeOfUse, documentation, reliability, support }
+
+  // Helpful votes
+  helpfulCount Int   @default(0)
+
+  isVerified Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  api  Api  @relation(fields: [apiId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([apiId, userId])
+  @@index([apiId])
+  @@index([userId])
+  @@index([rating])
+}
+
+model SavedApi {
+  id        String   @id @default(cuid())
+  userId    String
+  apiId     String
+  notes     String?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  api  Api  @relation(fields: [apiId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, apiId])
+  @@index([userId])
+}
+
+model SearchHistory {
+  id        String   @id @default(cuid())
+  userId    String
+  query     String
+  provider  String   // 'gemini'|'groq'|'ollama'|'mock'
+  results   Int      @default(0)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([createdAt])
+}
+
+model Changelog {
+  id          String   @id @default(cuid())
+  apiId       String
+  version     String?
+  title       String
+  description String   @db.Text
+
+  // Change severity
+  severity    ChangeSeverity @default(MINOR)
+
+  // AI analysis
+  aiSummary   String?  @db.Text
+  isBreaking  Boolean  @default(false)
+
+  publishedAt DateTime
+  detectedAt  DateTime @default(now())
+
+  sourceUrl   String?
+
+  api Api @relation(fields: [apiId], references: [id], onDelete: Cascade)
+
+  @@index([apiId])
+  @@index([publishedAt])
+  @@index([isBreaking])
+}
+
+model Subscription {
+  id        String   @id @default(cuid())
+  userId    String
+  apiId     String
+
+  // What to monitor
+  alertOn   String[] // ['downtime', 'degraded', 'breaking_change', 'new_version']
+
+  // Notification channels
+  channels  String[] // ['email', 'webhook', 'slack']
+  webhook   String?
+
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  api  Api  @relation(fields: [apiId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, apiId])
+  @@index([userId])
+  @@index([apiId])
+}
+
+// ==========================================
+// API COMPOSITION MODELS
+// ==========================================
+
+model Composition {
+  id          String   @id @default(cuid())
+  userId      String
+  name        String
+  description String?  @db.Text
+
+  // Workflow definition
+  workflow    Json     // Full workflow spec
+
+  // AI metadata
+  aiGenerated Boolean  @default(false)
+  prompt      String?  @db.Text
+
+  // Stats
+  runCount    Int      @default(0)
+  lastRunAt   DateTime?
+
+  isPublic    Boolean  @default(false)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user  User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  steps CompositionStep[]
+
+  @@index([userId])
+  @@index([isPublic])
+}
+
+model CompositionStep {
+  id            String   @id @default(cuid())
+  compositionId String
+  apiId         String?
+  order         Int
+  name          String
+  action        String
+  config        Json
+
+  createdAt     DateTime @default(now())
+
+  composition Composition @relation(fields: [compositionId], references: [id], onDelete: Cascade)
+  api         Api?        @relation(fields: [apiId], references: [id], onDelete: SetNull)
+
+  @@index([compositionId])
+}
+
+// ==========================================
+// ENUMS
+// ==========================================
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String
+  message   String   @db.Text
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
+
+model AlertSubscription {
+  id        String   @id @default(cuid())
+  email     String
+  alertType String   // 'all' | 'breaking' | 'deprecation'
+  createdAt DateTime @default(now())
+
+  @@unique([email, alertType])
+  @@index([email])
+}
+
+enum HealthStatus {
+  OPERATIONAL
+  DEGRADED
+  DOWN
+  MAINTENANCE
+  UNKNOWN
+}
+
+enum ChangeSeverity {
+  PATCH
+  MINOR
+  MAJOR
+  BREAKING
+}

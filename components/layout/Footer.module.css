@@ -1,0 +1,235 @@
+.footer {
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-subtle);
+  padding: 60px 0 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.5), transparent);
+}
+
+.inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.topRow {
+  display: grid;
+  grid-template-columns: 1.5fr repeat(3, 1fr);
+  gap: 48px;
+  margin-bottom: 48px;
+}
+
+/* Brand column */
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logoImg {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  border-radius: 8px;
+}
+
+.logoIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--gradient-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 14px;
+  color: white;
+  letter-spacing: -0.5px;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+  flex-shrink: 0;
+}
+
+.logoText {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.3px;
+}
+
+.logoText span {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.tagline {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 260px;
+}
+
+.aiBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 500;
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  color: var(--accent-primary);
+  width: fit-content;
+}
+
+.aiBadgeDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-success);
+  box-shadow: 0 0 8px var(--accent-success);
+}
+
+/* Link columns */
+.linkColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.columnTitle {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.footerLink {
+  font-size: 14px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+  cursor: pointer;
+}
+
+.footerLink:hover {
+  color: var(--text-primary);
+}
+
+/* Bottom row */
+.bottomRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 32px;
+  border-top: 1px solid var(--border-subtle);
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.copyright {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.copyright a {
+  color: var(--accent-primary);
+  text-decoration: none;
+}
+
+.copyright a:hover {
+  text-decoration: underline;
+}
+
+.bottomLinks {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.bottomLink {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.bottomLink:hover {
+  color: var(--text-secondary);
+}
+
+.socialLinks {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.socialLink {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-md);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.socialLink:hover {
+  color: var(--text-primary);
+  border-color: var(--border-default);
+  background: var(--bg-hover);
+}
+
+@media (max-width: 1024px) {
+  .topRow {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+  }
+}
+
+@media (max-width: 640px) {
+  .topRow {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .bottomRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .bottomLinks {
+    display: none;
+  }
+  .footer {
+    padding: 48px 0 24px;
+  }
+  .inner {
+    padding: 0 16px;
+  }
+}

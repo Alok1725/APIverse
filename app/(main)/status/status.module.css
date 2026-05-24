@@ -1,0 +1,217 @@
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 4rem 2rem 6rem;
+  color: var(--text-primary);
+}
+
+/* Hero */
+.hero {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.heroLabel {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
+}
+
+.heroHeading {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.heroSub {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* Status banner */
+.banner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.75rem;
+  border-radius: var(--radius-lg);
+  margin-bottom: 3rem;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.bannerOk {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  color: var(--accent-success);
+}
+
+.bannerWarn {
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  color: var(--accent-warning);
+}
+
+.bannerDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.bannerTitle {
+  flex: 1;
+}
+
+.lastChecked {
+  font-size: 0.78rem;
+  opacity: 0.7;
+  font-weight: 400;
+}
+
+/* Services */
+.servicesSection {
+  margin-bottom: 3rem;
+}
+
+.sectionHeading {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.serviceList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.serviceRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  transition: border-color 0.2s;
+}
+
+.serviceRow:hover {
+  border-color: var(--border-default);
+}
+
+.serviceName {
+  flex: 1;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.statusBadge {
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+}
+
+.operational {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--accent-success);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.checking {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--accent-warning);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.degraded {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--accent-danger);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+/* Uptime chart */
+.uptimeSection {
+  margin-bottom: 3rem;
+}
+
+.uptimeChart {
+  display: flex;
+  gap: 3px;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.bar {
+  flex: 1;
+  height: 36px;
+  border-radius: 3px;
+}
+
+.barOk {
+  background: var(--accent-success);
+  opacity: 0.8;
+}
+
+.barWarn {
+  background: var(--accent-warning);
+  opacity: 0.85;
+}
+
+.uptimeLabels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.uptimePct {
+  text-align: right;
+  font-size: 0.85rem;
+  color: var(--accent-success);
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+/* Incidents */
+.incidents {
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  text-align: center;
+}
+
+.incidents p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.noIncidents {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--accent-success);
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
