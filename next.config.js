@@ -18,7 +18,11 @@ const nextConfig = {
   },
   experimental: {
     serverActions: {
-      allowedOrigins: ['localhost:3000'],
+      allowedOrigins: [
+        'localhost:3000',
+        'apiverse-lpx4.onrender.com',
+        process.env.NEXTAUTH_URL?.replace('https://', '').replace('http://', '') ?? '',
+      ].filter(Boolean),
     },
   },
 }
