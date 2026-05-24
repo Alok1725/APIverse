@@ -530,3 +530,26 @@
   font-size: 15px;
   font-weight: 500;
 }
+
+@media (max-width: 768px) {
+  .page { padding: 24px 0 48px; }
+  .container { padding: 0 16px; }
+  .pageHeader { flex-direction: column; gap: 16px; }
+  .headerStats { width: 100%; gap: 12px; }
+  .headerStat { flex: 1; padding: 10px 12px; }
+  .headerStatValue { font-size: 22px; }
+  .filterRow {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+  }
+  .filterRow::-webkit-scrollbar { display: none; }
+  .changeCard { padding: 16px; gap: 10px; }
+  .cardTop { flex-direction: column; gap: 10px; }
+  .cardRight { align-items: flex-start; flex-direction: row; flex-wrap: wrap; gap: 8px; }
+  .subscribeBanner { flex-direction: column; padding: 20px 16px; gap: 12px; text-align: center; }
+  .bannerContent { text-align: left; }
+  .bannerBtn { width: 100%; }
+}

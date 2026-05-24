@@ -598,3 +598,9 @@
   color: var(--text-muted);
   font-weight: 400;
 }
+
+@media (max-width: 768px) {
+  .container { padding: 0 16px; }
+  .hero { padding: 40px 0 32px; }
+  .comingSoonBanner { padding: 10px 16px; font-size: 13px; }
+}

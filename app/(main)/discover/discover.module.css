@@ -125,7 +125,7 @@
 
 /* Controls */
 .controls {
-  padding: 24px 0 0;
+  padding: 16px 0 0;
   background: var(--bg-primary);
   position: sticky;
   top: 72px;
@@ -143,15 +143,21 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  flex-wrap: wrap;
-  padding-bottom: 20px;
+  padding-bottom: 16px;
 }
 
 .categoryPills {
   display: flex;
   gap: 8px;
-  flex-wrap: wrap;
   flex: 1;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 4px;
+}
+
+.categoryPills::-webkit-scrollbar {
+  display: none;
 }
 
 .pill {
@@ -236,6 +242,44 @@
 
 @media (max-width: 1024px) {
   .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 48px 16px 32px;
+  }
+  .heroSub {
+    font-size: 15px;
+    margin-bottom: 24px;
+  }
+  .aiBadge {
+    display: none;
+  }
+  .controls {
+    padding: 12px 0 0;
+  }
+  .container {
+    padding: 0 16px;
+  }
+  .controlsRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding-bottom: 12px;
+  }
+  .categoryPills {
+    flex: unset;
+    width: 100%;
+  }
+  .sortWrap {
+    justify-content: flex-end;
+  }
+  .gridSection {
+    padding: 24px 0 60px;
+  }
+  .card {
+    padding: 18px;
+  }
 }
 
 @media (max-width: 640px) {

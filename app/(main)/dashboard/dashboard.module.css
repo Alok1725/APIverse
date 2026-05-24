@@ -447,3 +447,8 @@
 }
 
 @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+@media (max-width: 768px) {
+  .container { padding: 0 16px; }
+  .pageHeader { flex-direction: column; gap: 12px; margin-bottom: 24px; }
+}

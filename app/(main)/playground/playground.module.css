@@ -594,3 +594,12 @@
   border-color: var(--accent-primary);
   color: var(--accent-primary);
 }
+
+@media (max-width: 768px) {
+  .page { padding: 24px 16px 40px; max-width: 100%; }
+  .pageHeader { flex-direction: column; align-items: stretch; }
+  .quickExampleWrap { flex-direction: column; align-items: stretch; gap: 6px; }
+  .quickSelect { min-width: unset; width: 100%; }
+  .panelHeader { flex-direction: column; align-items: flex-start; }
+  .respHeaderKey { min-width: 120px; }
+}

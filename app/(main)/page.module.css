@@ -1082,3 +1082,11 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 640px) {
+  .orb1 { width: 280px; height: 280px; }
+  .orb2 { width: 240px; height: 240px; }
+  .orb3 { width: 160px; height: 160px; }
+  .hero { padding: 48px 0 32px; }
+  .statsGrid { grid-template-columns: 1fr; }
+}
