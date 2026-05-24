@@ -51,6 +51,7 @@ if (process.env.GOOGLE_CLIENT_ID) {
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers,
+  trustHost: true,
   pages: {
     signIn: '/signin',
     error: '/signin',
