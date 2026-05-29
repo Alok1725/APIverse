@@ -72,3 +72,5 @@ $RECYCLE.BIN/
 
 # ---- Claude Code local config ----
 .claude/
+CLAUDE.md
+AGENTS.md
